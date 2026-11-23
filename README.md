@@ -313,3 +313,8 @@ Antes de disponibilizar o projeto para contribuições open source, o proprietá
 4. Execute `npm test` e depois `npm start`.
 
 Não use credenciais ou contas reais para testes sem revisar antes as limitações em `LIMITACOES.md`.
+
+
+## Licença
+
+Este projeto é distribuído sob a licença MIT. Consulte o arquivo [LICENSE](LICENSE) para conhecer os termos de uso, modificação e distribuição.
