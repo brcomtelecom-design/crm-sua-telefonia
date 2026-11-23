@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 2,
+  "package": "sua-telefonia-crm-web-node",
+  "branding": "SUA_TELEFONIA_CRM_WEB_NODE",
+  "version": "0.1.0",
+  "createdAt": "2026-11-22",
+  "runtime": {
+    "node": ">=22.16.0",
+    "validatedLocalNode": "v24.22.0",
+    "validatedLocalNpm": "11.19.1",
+    "sqlite": "node:sqlite"
+  },
+  "packageProfiles": {
+    "public": {
+      "rootFolder": "SUA_TELEFONIA_CRM_WEB_NODE",
+      "includesTests": false,
+      "includesPackagingTools": false,
+      "includesOperationalDocumentation": true
+    },
+    "source": {
+      "rootFolder": "SUA_TELEFONIA_CRM_WEB_NODE_SOURCE",
+      "includesTests": true,
+      "includesPackagingTools": true,
+      "includesOperationalDocumentation": true
+    }
+  },
+  "scope": {
+    "tenantIsolation": true,
+    "adminTenantCreation": true,
+    "secureSession": true,
+    "loginThrottle": true,
+    "wabaWebhookHmacOriginalBody": true,
+    "wabaDedupe": true,
+    "wabaPersistBeforeAck": true,
+    "wabaMixedAccountRejection": true,
+    "wabaStatusAccountIsolation": true,
+    "wabaExplicitCampaignAccount": true,
+    "xlsxTemporaryPrivateUpload": true,
+    "configurableRecipientLimit": true,
+    "durableRecipientState": true,
+    "campaignPauseResumeCancel": true,
+    "campaignReceiptsPreserved": true,
+    "interruptedRecipientRecoveredUncertain": true,
+    "agentGatewayV1": true,
+    "agentLeaseRecovery": true,
+    "qrSupervisorArchitecture": true,
+    "qrRealPairingTested": false
+  },
+  "packaging": {
+    "manifestSidecar": true,
+    "sha256PerFile": true,
+    "sha256Archive": true,
+    "overwriteAllowed": false,
+    "visualAssetsAllowlistEnforced": true
+  },
+  "excludedFromBothProfiles": [
+    ".env real e variantes",
+    "*.sqlite, *.sqlite-* e *.db*",
+    "*.log, *.pid, *.tmp e *.bak",
+    "chaves *.pem, *.key, *.p12 e *.pfx",
+    "node_modules",
+    ".git",
+    "data",
+    "logs",
+    "auth",
+    "qr-auth",
+    "campaign-temp",
+    "coverage",
+    "backups"
+  ],
+  "excludedFromPublicProfile": [
+    "tests/**",
+    "scripts/package.mjs",
+    "scripts/package-rules.mjs",
+    "scripts/verify-package.mjs",
+    "scripts/generate-lockfile.mjs"
+  ],
+  "sourceVisualAllowlist": [
+    "public/assets/logo-st-original.png",
+    "public/assets/avatar-default.svg",
+    "public/assets/favicon.svg"
+  ],
+  "validation": {
+    "testCommand": "node --test tests/*.test.mjs",
+    "testCount": 55,
+    "testPassCount": 55,
+    "testExitCode": 0,
+    "mjsSyntaxChecked": 48,
+    "mjsSyntaxFailures": 0,
+    "frontendSyntaxValid": true,
+    "lockfilePackages": 125,
+    "lockfileValidation": "npm install --package-lock-only --ignore-scripts --offline --no-audit --no-fund (exit 0)",
+    "browserValidation": {
+      "status": "passed",
+      "date": "2026-11-22",
+      "engine": "Chromium in-app browser and headless Chromium via CDP",
+      "viewports": [
+        "1440x900",
+        "360x800"
+      ],
+      "flows": [
+        "anonymous session",
+        "synthetic login",
+        "local installation creation",
+        "synthetic XLSX upload",
+        "local campaign creation pending_agent",
+        "campaigns view",
+        "connections view"
+      ],
+      "consoleIssues": 0,
+      "uncaughtExceptions": 0,
+      "httpErrors": 0,
+      "horizontalOverflowAt360": false,
+      "lighthouse": {
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1
+      },
+      "realWabaOrQrUsed": false
+    },
+    "independentReview": {
+      "status": "completed_with_findings_applied",
+      "date": "2026-11-22",
+      "mode": "read-only",
+      "model": "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
+      "scope": "src, public, scripts, tests and documentation",
+      "findingsApplied": [
+        "strict campaign executor validation",
+        "explicit not-found guard for conversation responses",
+        "refined internal packaging-name check"
+      ]
+    }
+  },
+  "externalCallsMade": false,
+  "dependencyInstallationPerformed": false,
+  "realWabaValidated": false,
+  "realQrPairingPerformed": false,
+  "hostingProvisioned": false,
+  "loadCapacityValidated": false
+}

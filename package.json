@@ -1,0 +1,19 @@
+{
+  "name": "sua-telefonia-crm-web-node",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Sua Telefonia CRM Web Node — atendimento, campanhas e gateway de comandos locais",
+  "engines": {
+    "node": ">=22.16.0"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/index.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "backup": "node --env-file-if-exists=.env scripts/backup.mjs"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "7.0.0-rc14",
+    "qrcode": "1.5.4"
+  }
+}

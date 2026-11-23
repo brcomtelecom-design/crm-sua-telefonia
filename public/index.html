@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Sistema de atendimento e campanhas da Sua Telefonia.">
+  <title>Sua Telefonia CRM</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <main>
+    <div id="login-view" class="login-shell">
+    <section class="login-card" aria-labelledby="login-title">
+      <img class="brand-logo" src="/assets/logo-st-original.png" alt="Sua Telefonia">
+      <p class="eyebrow">CRM Web Node</p>
+      <h1 id="login-title">Acesse seu atendimento</h1>
+      <form id="login-form">
+        <label>E-mail<input id="login-email" name="email" type="email" autocomplete="username" required></label>
+        <label>Senha<input id="login-password" name="password" type="password" autocomplete="current-password" required></label>
+        <button class="primary" type="submit">Entrar</button>
+      </form>
+      <p id="login-error" class="form-error" role="alert"></p>
+    </section>
+    </div>
+
+    <div id="app-view" class="app-shell" hidden>
+    <aside class="sidebar">
+      <img class="brand-logo compact" src="/assets/logo-st-original.png" alt="Sua Telefonia">
+      <nav aria-label="Navegação principal">
+        <button class="nav-item active" data-view="atendimento">Atendimento</button>
+        <button class="nav-item" data-view="campanhas">Campanhas</button>
+        <button class="nav-item" data-view="conexoes">Conexões</button>
+      </nav>
+      <div class="sidebar-footer">
+        <span id="user-email"></span>
+        <button id="logout-button" class="text-button">Sair</button>
+      </div>
+    </aside>
+
+    <section class="content">
+      <header class="topbar">
+        <div><p class="eyebrow">Sua Telefonia</p><h1 id="view-title">Atendimento</h1></div>
+        <div id="connection-state" class="state-pill pending">Carregando estado…</div>
+      </header>
+
+      <section id="view-atendimento" class="view active">
+        <div class="atendimento-grid">
+          <aside class="panel conversation-list">
+            <div class="panel-heading"><h2>Conversas</h2><button id="refresh-conversations" class="icon-button" title="Atualizar">↻</button></div>
+            <div id="conversation-items" class="list"></div>
+          </aside>
+          <article class="panel chat-panel">
+            <div id="chat-empty" class="empty-state">Selecione uma conversa para ver o histórico.</div>
+            <div id="chat-content" hidden>
+              <div class="panel-heading"><div><h2 id="chat-title"></h2><small id="chat-channel"></small></div></div>
+              <div id="message-items" class="messages"></div>
+              <form id="reply-form" class="reply-form">
+                <textarea id="reply-body" maxlength="4096" rows="3" placeholder="Digite a resposta" required></textarea>
+                <button class="primary" type="submit">Enviar</button>
+              </form>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="view-campanhas" class="view">
+        <div class="panel campaign-panel">
+          <div class="panel-heading"><div><h2>Campanhas</h2><small>Upload temporário de XLSX; limite configurável de destinatários.</small></div></div>
+          <form id="campaign-form" class="campaign-form">
+            <label>Arquivo XLSX<input id="campaign-file" type="file" accept=".xlsx" required></label>
+            <label>Nome<input id="campaign-name" maxlength="120" required></label>
+            <label>Modelo do WhatsApp<input id="campaign-template" maxlength="120" placeholder="nome_aprovado" required></label>
+            <label>Parâmetros do modelo (JSON)<input id="campaign-parameters" placeholder='["Cliente"]' autocomplete="off"></label>
+            <label>Executor<select id="campaign-executor"><option value="web">Web (leve)</option><option value="local">App local (grande)</option></select></label>
+            <label>Conta WABA<select id="campaign-account"><option value="">Selecione</option></select></label>
+            <label>Instalação local<select id="campaign-installation"><option value="">Selecione</option></select></label>
+            <button class="primary" type="submit">Criar campanha</button>
+          </form>
+          <p id="campaign-error" class="form-error" role="alert"></p>
+          <div id="campaign-summary" class="notice" hidden></div>
+          <div id="campaign-items" class="list separated"></div>
+        </div>
+      </section>
+
+      <section id="view-conexoes" class="view">
+        <div class="panel campaign-panel">
+          <div class="panel-heading"><div><h2>Conexões</h2><small>Estado real dos canais. Offline nunca aciona fallback automático.</small></div></div>
+          <details class="advanced">
+            <summary>Cadastrar conta QR Web</summary>
+            <form id="qr-form" class="inline-form">
+              <label>Nome<input id="qr-name" maxlength="120" placeholder="WhatsApp principal" required></label>
+              <button class="primary" type="submit">Criar conta QR</button>
+            </form>
+            <p id="qr-error" class="form-error" role="alert"></p>
+          </details>
+          <details class="advanced">
+            <summary>Cadastrar empresa e administrador</summary>
+            <form id="tenant-form" class="campaign-form">
+              <label>Empresa<input id="tenant-name" maxlength="120" required></label>
+              <label>E-mail do administrador<input id="tenant-email" type="email" autocomplete="off" required></label>
+              <label>Senha inicial<input id="tenant-password" type="password" minlength="12" autocomplete="new-password" required></label>
+              <button class="primary" type="submit">Criar empresa</button>
+            </form>
+            <p id="tenant-error" class="form-error" role="alert"></p>
+          </details>
+          <details class="advanced open">
+            <summary>Cadastrar conta WABA</summary>
+            <form id="waba-form" class="campaign-form">
+              <label>Nome<input id="waba-name" maxlength="120" required></label>
+              <label>Phone Number ID<input id="waba-phone-id" inputmode="numeric" required></label>
+              <label>WABA ID<input id="waba-id" inputmode="numeric" required></label>
+              <label>Access token<input id="waba-token" type="password" autocomplete="off" required></label>
+              <label>App secret<input id="waba-secret" type="password" autocomplete="off" required></label>
+              <button class="primary" type="submit">Cadastrar conta</button>
+            </form>
+            <p id="waba-error" class="form-error" role="alert"></p>
+          </details>
+          <div id="account-items" class="list separated"></div>
+          <details class="advanced">
+            <summary>Instalação do agente local</summary>
+            <form id="installation-form" class="inline-form">
+              <label>Nome<input id="installation-name" maxlength="120" placeholder="PC principal" required></label>
+              <button class="primary" type="submit">Gerar token</button>
+            </form>
+            <div id="installation-items" class="list separated"></div>
+            <pre id="installation-token" class="token-output" hidden></pre>
+          </details>
+        </div>
+      </section>
+    </section>
+    </div>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
