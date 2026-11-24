@@ -1,11 +1,36 @@
+# Dependencias
 node_modules/
+
+# Credenciais
 .env
 .env.*
 !.env.example
+*.pem
+*.key
+
+# Bancos de dados
 *.sqlite
+*.sqlite-*
 *.sqlite3
+*.sqlite3-*
 *.db
 *.db-wal
 *.db-shm
+
+# Dados privados e sessoes
+data/
+backups/
+uploads/
+qr-auth/
+temp-campaigns/
+
+# Logs e arquivos temporarios
 logs/
 *.log
+tmp/
+temp/
+
+# Testes e sistema
+coverage/
+.DS_Store
+Thumbs.db
