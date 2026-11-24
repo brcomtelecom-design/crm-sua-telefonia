@@ -302,8 +302,7 @@ Consulte `LIMITACOES.md`. Os principais gates externos são: `npm ci` em ambient
 
 Este repositório contém o código-fonte do MVP para avaliação e colaboração.
 Não envie arquivos `.env`, bancos de dados, backups, logs, sessões QR, chaves privadas nem dados de clientes.
-Antes de disponibilizar o projeto para contribuições open source, o proprietário deve decidir uma licença e verificar os direitos de uso dos materiais de marca e imagens.
-**Até que uma licença seja adicionada, a disponibilização pública não concede automaticamente permissão para reutilizar, modificar ou distribuir o código.**
+Este projeto é open source e está licenciado sob a licença MIT. Contribuições da comunidade são bem-vindas. Os direitos sobre marcas e imagens de terceiros devem ser respeitados.
 
 ### Como executar localmente
 
